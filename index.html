@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAM Certificate Practice Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .question h3 {
+      margin: 0;
+    }
+    .options label {
+      display: block;
+      margin: 5px 0;
+    }
+    .submit-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .result {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>IAM Certificate Practice Quiz</h1>
+  <form id="quizForm"></form>
+  <button class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+  <div id="result" class="result"></div>
+
+  <script>
+    const questions = [
+      { question: "What is the primary objective of asset management?", options: ["Maximizing asset life", "Minimizing maintenance costs", "Achieving organizational objectives through the optimal management of assets", "Ensuring compliance with regulations"], answer: 2 },
+      { question: "Which of the following best describes 'asset management' according to ISO 55000?", options: ["The management of physical assets", "The coordinated activity of an organization to realize value from assets", "The optimization of equipment uptime", "The financial accounting of assets"], answer: 1 },
+      { question: "What does the 'Line of Sight' principle refer to in asset management?", options: ["Visibility of assets in the field", "The connection between physical condition and asset value", "Clear alignment between asset activities and organizational objectives", "The alignment of safety procedures with regulatory requirements"], answer: 2 },
+      { question: "An Asset Management System (AMS) should primarily...", options: ["Be ISO 9001 certified", "Provide detailed technical instructions", "Provide a structured framework to manage assets", "Maximize inventory turnover"], answer: 2 },
+      { question: "Which document is used to articulate how an organization intends to achieve its asset management objectives?", options: ["Capital Expenditure Plan", "Strategic Asset Management Plan (SAMP)", "Asset Register", "Risk Management Matrix"], answer: 1 },
+      { question: "What is the main purpose of an asset management policy?", options: ["To define asset life cycle cost", "To define roles and responsibilities of operational staff", "To outline principles and approach to managing assets", "To provide budgeting guidelines"], answer: 2 },
+      { question: "Which of the following is NOT typically a phase of the asset life cycle?", options: ["Acquisition", "Operation", "Liquidation", "Renewal"], answer: 2 },
+      { question: "What is 'Whole Life Costing' in asset management?", options: ["The upfront capital expenditure", "The cost of asset maintenance", "Total cost of ownership over an asset's life", "Annual depreciation plus interest"], answer: 2 },
+      { question: "Risk in asset management is defined as:", options: ["The chance of component failure", "The effect of uncertainty on objectives", "The variance between expected and actual cost", "The expected downtime"], answer: 1 },
+      { question: "What is the purpose of an asset information strategy?", options: ["To reduce IT costs", "To optimize asset maintenance", "To ensure consistent and reliable asset information for decision making", "To automate procurement"], answer: 2 },
+      { question: "What is a key benefit of integrating asset management with organizational planning?", options: ["Faster procurement", "Improved regulatory compliance", "Alignment of assets with business goals", "Reduced number of staff required"], answer: 2 },
+      { question: "Which standard defines the requirements for an asset management system?", options: ["ISO 9001", "ISO 55001", "PAS 55", "ISO 31000"], answer: 1 },
+      { question: "Which of the following is considered a tangible asset?", options: ["Brand reputation", "Software license", "Pump station", "Intellectual property"], answer: 2 },
+      { question: "What role does leadership play in an Asset Management System?", options: ["They approve asset purchases only", "They ensure maintenance teams are resourced", "They provide direction and commitment to the AM policy and objectives", "They train operators"], answer: 2 },
+      { question: "What is the purpose of performance evaluation in asset management?", options: ["To track budget spend", "To monitor compliance with legislation", "To determine progress against AM objectives", "To assess insurance needs"], answer: 2 },
+      { question: "Which of the following would be included in an asset management plan?", options: ["Annual sales targets", "Employee disciplinary policy", "Asset lifecycle activities", "Facility blueprints only"], answer: 2 },
+      { question: "The 'Plan-Do-Check-Act' cycle is used for:", options: ["Inventory control", "Improving supplier engagement", "Continuous improvement of systems", "Allocating capital budgets"], answer: 2 },
+      { question: "What is the best definition of 'value' in asset management?", options: ["The resale value of an asset", "The profit an asset generates", "The benefit derived from the asset aligned with objectives", "The tax deduction potential"], answer: 2 },
+      { question: "What does ISO 55001 emphasize about asset risk?", options: ["Only financial risk should be managed", "All risk must be eliminated", "Risk should be understood and managed in the context of objectives", "Risk is managed by insurers only"], answer: 2 },
+      { question: "Which process supports strategic decision-making regarding assets?", options: ["Incident reporting", "Life cycle costing", "Job scheduling", "Security planning"], answer: 1 },
+      { question: "What does a risk register document?", options: ["Past failures", "Risk identification, assessment and mitigation", "Budget deficits", "Maintenance checklists"], answer: 1 },
+      { question: "What is one purpose of asset condition monitoring?", options: ["To reduce salaries", "To identify performance improvement opportunities", "To confirm audit findings", "To train engineers"], answer: 1 },
+      { question: "What is asset criticality?", options: ["The age of the asset", "The complexity of its technology", "The significance of an asset in achieving business outcomes", "How expensive it was to buy"], answer: 2 },
+      { question: "Which tool helps in visualizing asset condition over time?", options: ["Heat map", "Radar chart", "Deterioration curve", "Pie chart"], answer: 2 },
+      { question: "What is the purpose of stakeholder engagement in asset management?", options: ["To delay decision making", "To get funding for asset purchases", "To ensure all interested parties are considered in AM decisions", "To fulfill regulatory reporting"], answer: 2 },
+      { question: "An asset hierarchy helps to:", options: ["Identify organizational structure", "Clarify levels of asset breakdown", "Prioritize budgets", "Manage safety"], answer: 1 },
+      { question: "What type of asset decision-making is driven by a risk-based approach?", options: ["Proactive planning", "Inventory consolidation", "Last-minute purchasing", "Operator scheduling"], answer: 0 },
+      { question: "Which of these best describes asset portfolio management?", options: ["Focusing on the top 10 assets", "Managing a group of assets to deliver value", "Tracking staff usage", "Selling assets quickly"], answer: 1 },
+      { question: "Which of the following is a financial performance indicator?", options: ["Asset uptime", "Cost per unit of service", "Mean time between failure", "Inspection pass rate"], answer: 1 },
+      { question: "Why is data quality important in asset management?", options: ["It impresses auditors", "It reduces work orders", "It enables confident and defensible decision-making", "It prevents inspections"], answer: 2 },
+      { question: "What is the purpose of assurance in an asset management system?", options: ["To meet insurance requirements", "To validate compliance with policies and objectives", "To reduce the workforce", "To eliminate risk"], answer: 1 },
+      { question: "How does asset management support sustainability?", options: ["By investing only in green technologies", "By reducing paperwork", "By balancing environmental, social and economic considerations", "By avoiding procurement delays"], answer: 2 },
+      { question: "Why is governance important in asset management?", options: ["It replaces leadership", "It removes risks", "It establishes accountability and decision structures", "It defines audit frequency"], answer: 2 },
+      { question: "Which of the following is typically reviewed in a management review?", options: ["Staff vacation calendars", "Weather data", "AM performance, risks and opportunities", "Annual picnic details"], answer: 2 },
+      { question: "How does asset management relate to ISO 31000?", options: ["ISO 31000 is unrelated", "It replaces ISO 55001", "It provides principles for managing risk that complement AM", "It governs procurement only"], answer: 2 },
+      { question: "What is a key aspect of developing a Strategic Asset Management Plan (SAMP)?", options: ["Asset audit checklist", "Annual budget breakdown", "Clear long-term vision and objectives", "Inventory management"], answer: 2 },
+      { question: "What is a key activity in asset optimization?", options: ["Maximizing capital expenditure", "Analyzing asset life cycles", "Hiring more staff", "Improving office layouts"], answer: 1 },
+      { question: "Why do organizations need to perform asset audits?", options: ["To fulfill regulatory requirements", "To track asset depreciation", "To verify alignment with AM objectives", "To cut asset inventory costs"], answer: 2 }
+    ];
+
+    function generateQuiz() {
+      const quizForm = document.getElementById('quizForm');
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `
+          <h3>${index + 1}. ${q.question}</h3>
+          <div class="options">
+            ${q.options.map((opt, i) => `
+              <label>
+                <input type="radio" name="question${index}" value="${i}">
+                ${opt}
+              </label>
+            `).join('')}
+          </div>
+        `;
+        quizForm.appendChild(questionDiv);
+      });
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      questions.forEach((q, index) => {
+        const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+        if (selectedOption && parseInt(selectedOption.value) === q.answer) {
+          score++;
+        }
+      });
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `You scored ${score} out of ${questions.length}.`;
+    }
+
+    generateQuiz();
+  </script>
+</body>
+</html>
