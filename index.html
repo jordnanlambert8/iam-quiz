@@ -1,139 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IAM Certificate Practice Quiz</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f4f4;
-    }
-    h1 {
-      text-align: center;
-    }
-    .question {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-    .question h3 {
-      margin: 0;
-    }
-    .options label {
-      display: block;
-      margin: 5px 0;
-    }
-    .submit-btn {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 16px;
-    }
-    .result {
-      text-align: center;
-      font-size: 20px;
-      margin-top: 20px;
-    }
-    .feedback {
-      font-size: 16px;
-      margin-top: 10px;
-    }
-    .correct {
-      color: green;
-    }
-    .incorrect {
-      color: red;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+    h1 { text-align: center; }
+    .question { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 15px; }
+    .options label { display: block; margin: 5px 0; }
+    .submit-btn { display: block; margin: 20px auto; padding: 10px 20px; font-size: 16px; }
+    .result { text-align: center; font-size: 20px; margin-top: 20px; }
+    .feedback { font-size: 16px; margin-top: 10px; }
+    .correct { color: green; }
+    .incorrect { color: red; }
   </style>
 </head>
 <body>
-  <h1>IAM Certificate Practice Quiz</h1>
+  <h1>IAM Certificate Practice Quiz (60 Questions)</h1>
   <form id="quizForm"></form>
   <button class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
   <div id="result" class="result"></div>
 
   <script>
+    // Full 60-question array
     const questions = [
-      { question: "What is the primary objective of asset management?", options: ["Maximizing asset life", "Minimizing maintenance costs", "Achieving organizational objectives through the optimal management of assets", "Ensuring compliance with regulations"], answer: 2, explanation: "The goal of asset management is to align asset management with business objectives." },
-      { question: "Which of the following best describes 'asset management' according to ISO 55000?", options: ["The management of physical assets", "The coordinated activity of an organization to realize value from assets", "The optimization of equipment uptime", "The financial accounting of assets"], answer: 1, explanation: "ISO 55000 defines asset management as coordinated activity to realize value from assets." },
-      { question: "What does the 'Line of Sight' principle refer to in asset management?", options: ["Visibility of assets in the field", "The connection between physical condition and asset value", "Clear alignment between asset activities and organizational objectives", "The alignment of safety procedures with regulatory requirements"], answer: 2, explanation: "It ensures that asset management activities are aligned with organizational goals." },
-      { question: "An Asset Management System (AMS) should primarily...", options: ["Be ISO 9001 certified", "Provide detailed technical instructions", "Provide a structured framework to manage assets", "Maximize inventory turnover"], answer: 2, explanation: "An AMS should provide a structured framework for managing assets." },
-      { question: "Which document is used to articulate how an organization intends to achieve its asset management objectives?", options: ["Capital Expenditure Plan", "Strategic Asset Management Plan (SAMP)", "Asset Register", "Risk Management Matrix"], answer: 1, explanation: "The Strategic Asset Management Plan (SAMP) outlines how an organization plans to achieve asset management objectives." },
-      { question: "What is the main purpose of an asset management policy?", options: ["To define asset life cycle cost", "To define roles and responsibilities of operational staff", "To outline principles and approach to managing assets", "To provide budgeting guidelines"], answer: 2, explanation: "The policy defines the principles and approach to managing assets." },
-      { question: "Which of the following is NOT typically a phase of the asset life cycle?", options: ["Acquisition", "Operation", "Liquidation", "Renewal"], answer: 2, explanation: "Liquidation is not a typical phase; the focus is more on acquisition, operation, and renewal." },
-      { question: "What is 'Whole Life Costing' in asset management?", options: ["The upfront capital expenditure", "The cost of asset maintenance", "Total cost of ownership over an asset's life", "Annual depreciation plus interest"], answer: 2, explanation: "Whole life costing considers all costs over the life cycle of the asset." },
-      { question: "Risk in asset management is defined as:", options: ["The chance of component failure", "The effect of uncertainty on objectives", "The variance between expected and actual cost", "The expected downtime"], answer: 1, explanation: "Risk in asset management refers to uncertainty and its effect on achieving objectives." },
-      { question: "What is the purpose of an asset information strategy?", options: ["To reduce IT costs", "To optimize asset maintenance", "To ensure consistent and reliable asset information for decision making", "To automate procurement"], answer: 2, explanation: "The strategy ensures that accurate and reliable asset information is available for decision-making." },
-      { question: "What is a key benefit of integrating asset management with organizational planning?", options: ["Faster procurement", "Improved regulatory compliance", "Alignment of assets with business goals", "Reduced number of staff required"], answer: 2, explanation: "Aligning asset management with organizational planning helps to achieve strategic objectives." },
-      { question: "What does the ISO 55001 standard focus on?", options: ["Asset inventory tracking", "Asset performance optimization", "Establishing an asset management system", "Financial asset reporting"], answer: 2, explanation: "ISO 55001 is focused on creating an asset management system and framework." },
-      { question: "Which of the following is a critical factor in successful asset management?", options: ["Good relationship with suppliers", "Appropriate use of technology", "Increased marketing budget", "Regular employee training on asset issues"], answer: 1, explanation: "Using the right technology is crucial for tracking and managing assets effectively." },
-      { question: "What is the first step in implementing an asset management plan?", options: ["Identifying asset types", "Creating a strategic roadmap", "Assessing the current asset condition", "Setting asset management goals"], answer: 3, explanation: "A critical first step is assessing the current condition of assets to identify where improvements are needed." },
-      { question: "What is the role of asset managers?", options: ["To maintain assets only", "To minimize asset costs", "To manage the lifecycle and performance of assets", "To report to stakeholders"], answer: 2, explanation: "Asset managers oversee the entire lifecycle and performance of assets, aiming to maximize value." },
-      { question: "What does the asset management maturity model assess?", options: ["Employee training programs", "Asset lifecycle costs", "An organization's capability in managing assets", "Procurement strategies"], answer: 3, explanation: "The maturity model evaluates the effectiveness of asset management practices in an organization." },
-      { question: "What is the 'Criticality Assessment' of an asset?", options: ["A financial assessment", "The asset's impact on operations", "Its environmental footprint", "The regulatory compliance of the asset"], answer: 1, explanation: "Criticality assessments help to determine how essential an asset is for operations." },
-      { question: "What is an asset management strategy?", options: ["A plan for asset acquisition", "A roadmap for asset performance", "A report for stakeholders", "A legal requirement"], answer: 1, explanation: "An asset management strategy sets the long-term vision for managing an organization's assets." },
-      { question: "What is the function of asset lifecycle management?", options: ["Asset procurement only", "Tracking asset performance during its use", "Disposal of assets", "Ensuring assets meet regulatory requirements"], answer: 2, explanation: "Asset lifecycle management ensures assets are performing effectively during their use phase." },
-      { question: "How often should an asset management review be conducted?", options: ["Every 5 years", "Annually", "Monthly", "Only when issues arise"], answer: 1, explanation: "Annual reviews ensure that asset management strategies are continuously aligned with organizational goals." },
-      { question: "Which document provides the basis for asset management reporting?", options: ["The Asset Register", "The Asset Management Strategy", "ISO 55000", "The Strategic Asset Management Plan (SAMP)"], answer: 2, explanation: "The Asset Management Strategy is used to align reporting with organizational goals." },
-      { question: "What does the term 'asset performance' refer to?", options: ["Financial value of assets", "Operational efficiency of assets", "Age of the asset", "Cost of acquisition"], answer: 1, explanation: "Asset performance refers to how well the asset is performing in relation to its purpose and goals." },
-      { question: "What is the principle of risk-based decision making?", options: ["To make decisions based on asset value", "To prioritize decisions based on risk to organizational objectives", "To reduce risk to zero", "To minimize costs"], answer: 1, explanation: "Risk-based decision-making ensures that the focus is on risks that could disrupt organizational objectives." },
-      { question: "What is asset performance management?", options: ["Improving employee productivity", "Managing asset health and performance", "Reducing asset purchasing costs", "Maximizing asset downtime"], answer: 1, explanation: "Asset performance management is focused on ensuring assets meet performance targets." },
-      { question: "Which of these defines an asset's service life?", options: ["The period when an asset is under warranty", "The time it remains productive for the organization", "The time until depreciation equals 0", "The period when it requires regular maintenance"], answer: 2, explanation: "Service life refers to the period in which the asset provides value and performs as needed." },
-      { question: "Why is an asset register important?", options: ["To track asset location and condition", "To manage procurement processes", "To calculate depreciation", "To evaluate supplier performance"], answer: 1, explanation: "The asset register helps manage asset details including location, condition, and maintenance schedules." },
-      { question: "What is the role of 'asset stewardship'?", options: ["To oversee the management of assets to meet organizational objectives", "To manage the financial aspects of asset ownership", "To handle asset warranties", "To increase asset acquisition rates"], answer: 1, explanation: "Asset stewardship ensures assets are managed responsibly, effectively, and in alignment with goals." },
-      { question: "What is the most important factor when prioritizing asset maintenance?", options: ["Asset age", "Asset condition", "Cost of maintenance", "Time of last repair"], answer: 2, explanation: "Asset condition is the primary factor that dictates when and how maintenance should be carried out." },
-      { question: "What is the purpose of risk-based asset management?", options: ["To reduce risks to zero", "To prioritize resources based on risk to the organization", "To identify only high-value assets", "To reduce the time spent on maintenance"], answer: 1, explanation: "Risk-based asset management ensures that resources are prioritized based on risks to organizational goals." },
-      { question: "How does asset management contribute to organizational sustainability?", options: ["By reducing operational costs", "By optimizing asset performance and minimizing environmental impact", "By improving the employee retention rate", "By ensuring compliance with financial reporting standards"], answer: 2, explanation: "Asset management plays a key role in optimizing performance while minimizing environmental impact." },
-      { question: "Which document outlines the asset management policies of an organization?", options: ["Capital Expenditure Plan", "Asset Management Strategy", "Risk Management Plan", "Procurement Strategy"], answer: 1, explanation: "The Asset Management Strategy outlines the policies and approach for managing assets." },
-      // Continue with questions 40-60...
+      // 1
+      { question: "What is the primary objective of asset management?", options: ["Maximizing asset life","Minimizing maintenance costs","Achieving organizational objectives","Ensuring compliance with regulations"], answer: 2, explanation: "Asset management aligns assets with business objectives." },
+      // 2
+      { question: "Which standard defines requirements for an Asset Management System?", options: ["ISO 9001","ISO 31000","ISO 55001","ISO 14001"], answer: 2, explanation: "ISO 55001 specifies AMS requirements." },
+      // 3
+      { question: "What does 'value' refer to in asset management?", options: ["Financial return only","Stakeholder benefit aligned with objectives","Regulatory compliance","Technical condition"], answer: 1, explanation: "Value is benefit delivered aligned to objectives." },
+      // 4
+      { question: "What is 'risk' under ISO 55000?", options: ["Probability of failure","Effect of uncertainty on objectives","Maintenance cost variance","Asset age"], answer: 1, explanation: "Risk is effect of uncertainty on objectives." },
+      // 5
+      { question: "What is a Strategic Asset Management Plan (SAMP)?", options: ["Procurement schedule","Roadmap for achieving asset objectives","Maintenance manual","Disposal plan"], answer: 1, explanation: "SAMP outlines how to meet AM objectives." },
+      // 6
+      { question: "Which clause in ISO 55001 addresses leadership?", options: ["Clause 4","Clause 5","Clause 6","Clause 7"], answer: 1, explanation: "Clause 5 covers leadership roles and commitment." },
+      // 7
+      { question: "Why is an Asset Register important?", options: ["Tracks asset details","Calculates depreciation","Schedules staff","Predicts failures"], answer: 0, explanation: "It records all asset information." },
+      // 8
+      { question: "What is Whole Life Costing?", options: ["Initial cost","Maintenance cost","Total cost over life cycle","Disposal cost"], answer: 2, explanation: "Considers all costs from acquisition to disposal." },
+      // 9
+      { question: "Define asset criticality.", options: ["Replacement cost","Impact on objectives if failure","Physical size","Age of asset"], answer: 1, explanation: "Criticality measures impact of failure on objectives." },
+      // 10
+      { question: "What is an Asset Management Policy?", options: ["Technical guideline","Organizational principles for AM","Budget plan","Inventory list"], answer: 1, explanation: "Policy sets AM principles and intentions." },
+      // 11
+      { question: "What does PDCA stand for?", options: ["Plan-Do-Check-Act","Prepare-Deploy-Check-Adjust","Plan-Develop-Change-Apply","Predict-Do-Control-Adjust"], answer: 0, explanation: "PDCA is Plan-Do-Check-Act cycle for improvement." },
+      // 12
+      { question: "What is a KPI?", options: ["Key Performance Indicator","Key Process Initiative","Known Potential Issue","Key People Involved"], answer: 0, explanation: "KPI measures progress against objectives." },
+      // 13
+      { question: "What is MTBF?", options: ["Mean Time Between Failures","Mean Time Before Fix","Maintenance Time Buffer","Maximum Time Between Fixes"], answer: 0, explanation: "Average operational time between failures." },
+      // 14
+      { question: "What is MTTR?", options: ["Mean Time To Repair","Mean Time To Replace","Maintenance Time To Respond","Maximum Time To Repair"], answer: 0, explanation: "Average time to restore after failure." },
+      // 15
+      { question: "What is preventive maintenance?", options: ["After-failure fixes","Scheduled actions to prevent failure","Condition-based triggers","Inspection only"], answer: 1, explanation: "Planned actions to prevent failures." },
+      // 16
+      { question: "What is condition-based maintenance?", options: ["Scheduled only","Triggered by monitored condition","Reactive after failure","Risk-based"], answer: 1, explanation: "Based on real-time asset condition data." },
+      // 17
+      { question: "What is RCM?", options: ["Risk Cost Management","Reliability-Centered Maintenance","Reactive Corrective Measures","Resource Compliance Matrix"], answer: 1, explanation: "RCM focuses on function and failure modes." },
+      // 18
+      { question: "What is TPM?", options: ["Total Productive Maintenance","Technical Protocol Manual","Time Process Management","Total Price Model"], answer: 0, explanation: "Operator-driven proactive maintenance approach." },
+      // 19
+      { question: "What is an asset hierarchy?", options: ["Budget hierarchy","Parent-child asset levels","Staff hierarchy","Vendor hierarchy"], answer: 1, explanation: "Organizes assets into levels of sub-units." },
+      // 20
+      { question: "What is stakeholder engagement?", options: ["Informing stakeholders","Involving stakeholders in decisions","Annual reports","Audits"], answer: 1, explanation: "Actively involve stakeholders in AM." },
+      // 21
+      { question: "What is assurance in AM?", options: ["Insurance only","Audits and reviews","Shop-floor checks","No oversight"], answer: 1, explanation: "Assurance verifies AM system effectiveness." },
+      // 22
+      { question: "What is gap analysis?", options: ["Comparing current vs desired state","Asset backfilling","Budget gap","Training gap"], answer: 0, explanation: "Identify gaps between current and target." },
+      // 23
+      { question: "What is benchmarking?", options: ["Process mapping","Comparing to best practices","Asset tagging","Cost tracking"], answer: 1, explanation: "Compare performance against peers or standards." },
+      // 24
+      { question: "Why is data quality important?", options: ["For audits","Reliable decision-making","Reduces staff","Increases costs"], answer: 1, explanation: "Accurate data underpins decisions." },
+      // 25
+      { question: "What is an asset information system?", options: ["Finance tool","Data management system","Email system","ERP module"], answer: 1, explanation: "Manages and shares asset data." },
+      // 26
+      { question: "What is disposal planning?", options: ["End-of-life strategy","Procurement planning","Maintenance scheduling","No action"], answer: 0, explanation: "Plan for decommissioning and disposal." },
+      // 27
+      { question: "What is asset renewal?", options: ["Routine maintenance","Major upgrade/replacement","Disposal only","No change"], answer: 1, explanation: "Upgrading or replacing assets." },
+      // 28
+      { question: "What is whole life costing?", options: ["Initial cost","Operational cost","Comprehensive life cycle cost","Disposal cost"], answer: 2, explanation: "Includes all costs, including socio-environmental." },
+      // 29
+      { question: "How does ISO 31000 apply?", options: ["Unrelated","Provides risk management for AM","Replaces ISO 55001","Only financial risk"], answer: 1, explanation: "ISO 31000 risk principles integrate with AM." },
+      // 30
+      { question: "What is continuous improvement?", options: ["One-time project","Ongoing incremental enhancements","Only audits","Only training"], answer: 1, explanation: "Regular improvements to AM processes." },
+      // 31
+      { question: "What guides AM investment decisions?", options: ["Age of asset","Intuition","Data and risk analysis","Supplier preference"], answer: 2, explanation: "Decisions based on data and risk." },
+      // 32
+      { question: "What is governance in AM?", options: ["No structure","Defined roles and cycles","Board-only meetings","Finance-only oversight"], answer: 1, explanation: "Governance sets accountability and decision structure." },
+      // 33
+      { question: "What is a management review?", options: ["Daily meeting","Periodic leadership review of AM performance","Work order meeting","External audit"], answer: 1, explanation: "Leadership reviews AM system effectiveness." },
+      // 34
+      { question: "What is an internal audit?", options: ["External check","Systematic compliance review","Random park check","No audit"], answer: 1, explanation: "Checks AM against policy and standards." },
+      // 35
+      { question: "What is compliance in AM?", options: ["Ignoring laws","Meeting all requirements","Only safety compliance","Only financial compliance"], answer: 1, explanation: "Compliance ensures adherence to requirements." },
+      // 36
+      { question: "What is a risk register?", options: ["List of risks","Financial report","Maintenance log","Training plan"], answer: 0, explanation: "Records identified AM risks and controls." },
+      // 37
+      { question: "What is an asset life cycle?", options: ["Procurement and disposal only","Phases from creation to disposal","Only operation","Only maintenance"], answer: 1, explanation: "Covers all phases: planning to disposal." },
+      // 38
+      { question: "What is resilience in AM?", options: ["Redundancy only","Capacity to recover from disruptions","Never fail","Always available"], answer: 1, explanation: "Resilience is ability to recover effectively." },
+      // 39
+      { question: "What is sustainability in AM?", options: ["Only green tech","Balancing environmental, social, economic considerations","No impact","Only cost savings"], answer: 1, explanation: "Ensures long-term balanced outcomes." },
+      // 40
+      { question: "What is insurance in AM?", options: ["Primary control","Risk transfer mechanism","Eliminates all risk","No role"], answer: 1, explanation: "Insurance transfers certain risks." },
+      // 41
+      { question: "What is KPI trending?", options: ["Daily staff review","Monitoring KPI changes over time","Single-point measurement","HR tool"], answer: 1, explanation: "Analyzing KPI trends aids decision making." },
+      // 42
+      { question: "What is continuous monitoring?", options: ["One-time review","Ongoing surveillance of asset conditions","Annual audit","No monitoring"], answer: 1, explanation: "Real-time monitoring for proactive actions." },
+      // 43
+      { question: "What is a data governance framework?", options: ["Data deletion only","Policies and standards for data management","IT tool","No policy"], answer: 1, explanation: "Framework ensures data quality and control." },
+      // 44
+      { question: "What is change management in AM?", options: ["Asset upgrades only","Managing changes to assets or processes","No changes","Only software updates"], answer: 1, explanation: "Controls changes to minimize disruption." },
+      // 45
+      { question: "What is a lessons learned register?", options: ["Mistake log","Asset performance log","Documentation of learning from events","No register"], answer: 2, explanation: "Captures insights to improve future actions." },
+      // 46
+      { question: "What is a competency framework?", options: ["Training schedule","Skills and knowledge requirements for roles","Asset manual","Only HR tool"], answer: 1, explanation: "Defines required competencies for AM roles." },
+      // 47
+      { question: "What is a stakeholder map?", options: ["Physical map","Visual of stakeholders and influence","Asset location plan","No map"], answer: 1, explanation: "Shows stakeholder relationships and priorities." },
+      // 48
+      { question: "What is a communication plan in AM?", options: ["Email schedule","Plan for sharing AM information","Meeting agenda","No plan"], answer: 1, explanation: "Defines how AM info is communicated." },
+      // 49
+      { question: "What is performance benchmarking?", options: ["HR review","Comparing AM metrics to best performers","Only cost comparison","No benchmarking"], answer: 1, explanation: "Helps set targets based on best practice." },
+      // 50
+      { question: "What is an operational risk?", options: ["Financial only","Risk from operational asset use","HR risk","No risk"], answer: 1, explanation: "Risks arising from asset operations." },
+      // 51
+      { question: "What is scenario planning?", options: ["Procurement scenario","Assessing various future scenarios for assets","No planning","Only risk register"], answer: 1, explanation: "Prepares for different future states." },
+      // 52
+      { question: "What is value realization?", options: ["Accounting only","Ensuring benefits from assets are achieved","Only ROI","No realization"], answer: 1, explanation: "Ensures expected value is delivered." },
+      // 53
+      { question: "What is a maintenance strategy?", options: ["Random","Plan for maintenance approach","No strategy","Only budget planning"], answer: 1, explanation: "Defines how maintenance is prioritized and executed." },
+      // 54
+      { question: "What is logistics management in AM?", options: ["Staff movement","Managing spares and supplies","No logistics","Only vendor"], answer: 1, explanation: "Ensures availability of required materials and spares." },
+      // 55
+      { question: "What is an asset performance dashboard?", options: ["Financial screen","Visual tool showing AM metrics","Only graphs","No dashboard"], answer: 1, explanation: "Provides real-time KPI visualization." },
+      // 56
+      { question: "What is a digital twin?", options: ["Robot","Virtual model of asset","Spare part","No twin"], answer: 1, explanation: "Digital representation of physical assets for analysis." },
+      // 57
+      { question: "What is IoT in AM?", options: ["Internet of Things","Investment of Trust","Only sensors","No IoT"], answer: 0, explanation: "IoT uses sensors to collect asset data." },
+      // 58
+      { question: "What is CMMS?", options: ["Content management system","Computerized Maintenance Management System","Cost management method","No CMMS"], answer: 1, explanation: "Software for scheduling and tracking maintenance." },
+      // 59
+      { question: "What is predictive analytics?", options: ["Past data review","Using data to predict future events","Only statistics","No analytics"], answer: 1, explanation: "Analyzes patterns to predict asset failures." },
+      // 60
+      { question: "What is root cause analysis?", options: ["Surface level fixes","Investigating underlying causes of failure","No analysis","Only repair"], answer: 1, explanation: "Identifies fundamental reasons for failures." }
     ];
 
     function generateQuiz() {
-      const quizForm = document.getElementById('quizForm');
-      questions.forEach((q, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.classList.add('question');
-        questionDiv.innerHTML = `
-          <h3>${index + 1}. ${q.question}</h3>
+      const form = document.getElementById('quizForm');
+      questions.forEach((q, idx) => {
+        const div = document.createElement('div'); div.className = 'question';
+        div.innerHTML = `
+          <h3>Q${idx+1}. ${q.question}</h3>
           <div class="options">
-            ${q.options.map((opt, i) => `
-              <label>
-                <input type="radio" name="question${index}" value="${i}">
-                ${opt}
-              </label>
-            `).join('')}
+            ${q.options.map((opt,i) => `<label><input type="radio" name="q${idx}" value="${i}"> ${opt}</label>`).join('')}
           </div>
-          <div id="feedback${index}" class="feedback"></div>
+          <div id="feedback${idx}" class="feedback"></div>
         `;
-        quizForm.appendChild(questionDiv);
+        form.appendChild(div);
       });
     }
 
     function submitQuiz() {
       let score = 0;
-      questions.forEach((q, index) => {
-        const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-        const feedbackDiv = document.getElementById(`feedback${index}`);
-        
-        if (selectedOption) {
-          if (parseInt(selectedOption.value) === q.answer) {
-            score++;
-            feedbackDiv.innerHTML = `<span class="correct">Correct! ${q.explanation}</span>`;
-          } else {
-            feedbackDiv.innerHTML = `<span class="incorrect">Incorrect! ${q.explanation}</span>`;
-          }
+      questions.forEach((q, idx) => {
+        const sel = document.querySelector(`input[name="q${idx}"]:checked`);
+        const fb = document.getElementById(`feedback${idx}`);
+        if (sel) {
+          if (parseInt(sel.value) === q.answer) { score++; fb.innerHTML = `<span class="correct">Correct! ${q.explanation}</span>`; }
+          else fb.innerHTML = `<span class="incorrect">Incorrect! ${q.explanation}</span>`;
         }
       });
-
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = `You scored ${score} out of ${questions.length}.`;
+      document.getElementById('result').textContent = `Your score: ${score}/${questions.length}`;
     }
 
-    // Generate the quiz on page load
     generateQuiz();
   </script>
 </body>
