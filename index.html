@@ -84,7 +84,12 @@
       { question: "What is asset performance management?", options: ["Improving employee productivity", "Managing asset health and performance", "Reducing asset purchasing costs", "Maximizing asset downtime"], answer: 1, explanation: "Asset performance management is focused on ensuring assets meet performance targets." },
       { question: "Which of these defines an asset's service life?", options: ["The period when an asset is under warranty", "The time it remains productive for the organization", "The time until depreciation equals 0", "The period when it requires regular maintenance"], answer: 2, explanation: "Service life refers to the period in which the asset provides value and performs as needed." },
       { question: "Why is an asset register important?", options: ["To track asset location and condition", "To manage procurement processes", "To calculate depreciation", "To evaluate supplier performance"], answer: 1, explanation: "The asset register helps manage asset details including location, condition, and maintenance schedules." },
-      { question: "What is the role of 'asset stewardship'?", options: ["To oversee the management of assets to meet organizational objectives", "To manage the financial aspects of asset ownership", "To handle asset warranties", "To increase asset acquisition rates"], answer: 1, explanation: "Asset stewardship ensures assets are managed responsibly, effectively, and in alignment with goals." }
+      { question: "What is the role of 'asset stewardship'?", options: ["To oversee the management of assets to meet organizational objectives", "To manage the financial aspects of asset ownership", "To handle asset warranties", "To increase asset acquisition rates"], answer: 1, explanation: "Asset stewardship ensures assets are managed responsibly, effectively, and in alignment with goals." },
+      { question: "What is the most important factor when prioritizing asset maintenance?", options: ["Asset age", "Asset condition", "Cost of maintenance", "Time of last repair"], answer: 2, explanation: "Asset condition is the primary factor that dictates when and how maintenance should be carried out." },
+      { question: "What is the purpose of risk-based asset management?", options: ["To reduce risks to zero", "To prioritize resources based on risk to the organization", "To identify only high-value assets", "To reduce the time spent on maintenance"], answer: 1, explanation: "Risk-based asset management ensures that resources are prioritized based on risks to organizational goals." },
+      { question: "How does asset management contribute to organizational sustainability?", options: ["By reducing operational costs", "By optimizing asset performance and minimizing environmental impact", "By improving the employee retention rate", "By ensuring compliance with financial reporting standards"], answer: 2, explanation: "Asset management plays a key role in optimizing performance while minimizing environmental impact." },
+      { question: "Which document outlines the asset management policies of an organization?", options: ["Capital Expenditure Plan", "Asset Management Strategy", "Risk Management Plan", "Procurement Strategy"], answer: 1, explanation: "The Asset Management Strategy outlines the policies and approach for managing assets." },
+      // Continue with questions 40-60...
     ];
 
     function generateQuiz() {
@@ -123,11 +128,14 @@
           }
         }
       });
+
       const resultDiv = document.getElementById('result');
       resultDiv.innerHTML = `You scored ${score} out of ${questions.length}.`;
     }
 
+    // Generate the quiz on page load
     generateQuiz();
   </script>
 </body>
 </html>
+
